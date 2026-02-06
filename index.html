@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario Escolar 2025-2026 | Programación</title>
+    <title>Calendario Escolar 2025-2026 | Programación DIW</title>
     <style>
         :root {
             --bg: #f8fafc;
@@ -13,8 +13,9 @@
             --holiday: #ef4444;
             --non-school: #f59e0b;
             --vacation: #bbf7d0; 
-            --diw-class: #e0f2fe; /* Azul claro para Clase DIW */
-            --weekend: #e7ebef;
+            --diw-class: #e0f2fe;
+            --dual: #e9d5ff;
+            --weekend: #f1f5f9;
         }
 
         body {
@@ -32,25 +33,23 @@
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
-        h1 {
-            margin: 0;
-            color: #0f172a;
-            font-size: 2rem;
-        }
-
-        .school-name {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 1.2rem;
+        .info-panel {
+            background: #fff;
+            border-left: 5px solid #a855f7;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            line-height: 1.6;
         }
 
         .legend {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             margin-bottom: 30px;
             flex-wrap: wrap;
         }
@@ -59,19 +58,19 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .dot {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             border-radius: 4px;
         }
 
         .calendar-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .month-card {
@@ -112,7 +111,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             border-radius: 6px;
             cursor: default;
             transition: transform 0.1s;
@@ -123,59 +122,68 @@
             z-index: 10;
         }
 
-        .weekend {
-            background-color: var(--weekend);
-            color: #94a3b8;
+        .weekend { background-color: var(--weekend); color: #94a3b8; }
+        .holiday { background-color: var(--holiday) !important; color: white !important; font-weight: bold; }
+        .non-school { background-color: var(--non-school) !important; color: white !important; font-weight: bold; }
+        .vacation { background-color: var(--vacation) !important; color: #166534 !important; }
+        .diw-class { background-color: var(--diw-class) !important; color: #0369a1 !important; border: 1px dashed #7dd3fc; }
+        .dual { background-color: var(--dual) !important; color: #6b21a8 !important; font-weight: bold; border: 1px solid #c084fc; }
+
+        .ud-table {
+            width: 100%;
+            margin-top: 40px;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        .holiday {
-            background-color: var(--holiday) !important;
-            color: white !important;
-            font-weight: bold;
+        .ud-table th, .ud-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .non-school {
-            background-color: var(--non-school) !important;
-            color: white !important;
-            font-weight: bold;
-        }
+        .ud-table th { background: #f1f5f9; color: #475569; font-weight: 600; }
 
-        .vacation {
-            background-color: var(--vacation) !important;
-            color: #166534 !important;
-            font-weight: 500;
-        }
-
-        .diw-class {
-            background-color: var(--diw-class) !important;
-            color: #0369a1 !important;
-            font-weight: 600;
-        }
-
-        @media (max-width: 600px) {
-            .calendar-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media (max-width: 600px) { .calendar-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>Calendario Escolar 2025/2026</h1>
-        <div class="school-name">Programación DIW</div>
+        <h1>Planificación Docente 2025/2026</h1>
+        <div style="color: var(--primary); font-weight: 600;">Programación DIW</div>
     </header>
+
+    <div class="info-panel">
+        <strong>Resumen Unidades Didácticas:</strong><br>
+        Se han distribuido 11 unidades entre 76 sesiones disponibles (M, X, V) antes de la Formación Dual.<br>
+        <strong>Formación Dual:</strong> Inicia el 13 de abril de 2026 y finaliza el 9 de junio (280h totales / 40 días lectivos).
+    </div>
 
     <div class="legend">
         <div class="legend-item"><div class="dot" style="background: var(--holiday)"></div> Festivo</div>
-        <div class="legend-item"><div class="dot" style="background: var(--non-school)"></div> Día No Lectivo</div>
-        <div class="legend-item"><div class="dot" style="background: var(--vacation)"></div> Vacaciones / Fuera curso</div>
-        <div class="legend-item"><div class="dot" style="background: var(--diw-class)"></div> Clase DIW (M, X, V)</div>
-        <div class="legend-item"><div class="dot" style="background: var(--weekend)"></div> Fin de semana</div>
+        <div class="legend-item"><div class="dot" style="background: var(--non-school)"></div> No Lectivo</div>
+        <div class="legend-item"><div class="dot" style="background: var(--dual)"></div> Periodo Dual</div>
+        <div class="legend-item"><div class="dot" style="background: var(--diw-class)"></div> Sesión UD (Pasa el cursor)</div>
+        <div class="legend-item"><div class="dot" style="background: var(--vacation)"></div> Vacaciones</div>
     </div>
 
     <div id="calendar-container" class="calendar-grid"></div>
+
+    <table class="ud-table" id="summary-table">
+        <thead>
+            <tr>
+                <th>Unidad</th>
+                <th>Sesiones Estimadas</th>
+                <th>Periodo Aproximado</th>
+            </tr>
+        </thead>
+        <tbody id="ud-summary-body"></tbody>
+    </table>
 </div>
 
 <script>
@@ -208,81 +216,93 @@
         "2026-05-04": { type: "non-school", label: "Día no lectivo provincial" }
     };
 
-    const monthNames = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-    const dayLabels = ["L", "M", "X", "J", "V", "S", "D"];
-
     const schoolStart = new Date(2025, 8, 15);
+    const dualStart = new Date(2026, 3, 13);
+    const dualEnd = new Date(2026, 5, 9);
     const schoolEnd = new Date(2026, 5, 23);
 
+    // Mapeo de sesiones DIW por fecha
+    const diwSessions = {};
+    const udDistribution = [];
+
+    function calculateSessions() {
+        let current = new Date(schoolStart);
+        let sessions = [];
+
+        while (current < dualStart) {
+            const dow = current.getDay();
+            const key = current.toISOString().split('T')[0];
+            
+            // Martes(2), Miércoles(3), Viernes(5)
+            if ((dow === 2 || dow === 3 || dow === 5) && !academicEvents[key]) {
+                sessions.push(key);
+            }
+            current.setDate(current.getDate() + 1);
+        }
+
+        // Dividir las sesiones entre 11 unidades
+        const totalSessions = sessions.length;
+        const sessionsPerUd = Math.floor(totalSessions / 11);
+        const remainder = totalSessions % 11;
+
+        let index = 0;
+        for (let i = 1; i <= 11; i++) {
+            const count = i <= remainder ? sessionsPerUd + 1 : sessionsPerUd;
+            const startKey = sessions[index];
+            for (let j = 0; j < count; j++) {
+                diwSessions[sessions[index]] = `UD${i}`;
+                index++;
+            }
+            const endKey = sessions[index - 1];
+            udDistribution.push({ name: `UD${i}`, count, start: startKey, end: endKey });
+        }
+    }
+
     function generateCalendar() {
+        calculateSessions();
         const container = document.getElementById('calendar-container');
-        
-        const periods = [
+        const months = [
             { m: 8, y: 2025 }, { m: 9, y: 2025 }, { m: 10, y: 2025 }, { m: 11, y: 2025 },
             { m: 0, y: 2026 }, { m: 1, y: 2026 }, { m: 2, y: 2026 }, { m: 3, y: 2026 },
             { m: 4, y: 2026 }, { m: 5, y: 2026 }
         ];
 
-        periods.forEach(period => {
+        months.forEach(period => {
             const card = document.createElement('div');
             card.className = 'month-card';
-
-            const title = document.createElement('div');
-            title.className = 'month-title';
-            title.textContent = `${monthNames[period.m]} ${period.y}`;
-            card.appendChild(title);
-
-            const header = document.createElement('div');
-            header.className = 'days-header';
-            dayLabels.forEach(label => {
-                const span = document.createElement('span');
-                span.textContent = label;
-                header.appendChild(span);
-            });
-            card.appendChild(header);
-
+            card.innerHTML = `<div class="month-title">${["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"][period.m]} ${period.y}</div>`;
+            
             const grid = document.createElement('div');
             grid.className = 'days-grid';
+            ['L', 'M', 'X', 'J', 'V', 'S', 'D'].forEach(l => grid.innerHTML += `<div class="days-header">${l}</div>`);
 
-            let firstDay = new Date(period.y, period.m, 1).getDay();
-            firstDay = (firstDay === 0) ? 6 : firstDay - 1;
+            let firstDay = (new Date(period.y, period.m, 1).getDay() + 6) % 7;
+            for (let i = 0; i < firstDay; i++) grid.innerHTML += '<div class="day empty"></div>';
+
             const daysInMonth = new Date(period.y, period.m + 1, 0).getDate();
-
-            for (let i = 0; i < firstDay; i++) {
-                const empty = document.createElement('div');
-                empty.className = 'day empty';
-                grid.appendChild(empty);
-            }
-
             for (let d = 1; d <= daysInMonth; d++) {
+                const date = new Date(period.y, period.m, d);
+                const key = date.toISOString().split('T')[0];
                 const dayEl = document.createElement('div');
                 dayEl.className = 'day';
                 dayEl.textContent = d;
 
-                const dateObj = new Date(period.y, period.m, d);
-                const dateKey = `${period.y}-${String(period.m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-                
-                const dayOfWeek = dateObj.getDay(); 
-                
-                if (dayOfWeek === 0 || dayOfWeek === 6) {
-                    dayEl.classList.add('weekend');
-                }
+                const dow = date.getDay();
+                const event = academicEvents[key];
 
-                const event = academicEvents[dateKey];
-                const isOutOfSchool = dateObj < schoolStart || dateObj > schoolEnd;
-                
                 if (event) {
                     dayEl.classList.add(event.type);
                     dayEl.title = event.label;
-                } else if (isOutOfSchool) {
+                } else if (date < schoolStart || date > schoolEnd) {
                     dayEl.classList.add('vacation');
-                    dayEl.title = "Periodo no lectivo";
-                } else {
-                    // Si es lectivo, comprobar si es Martes (2), Miércoles (3) o Viernes (5)
-                    if (dayOfWeek === 2 || dayOfWeek === 3 || dayOfWeek === 5) {
-                        dayEl.classList.add('diw-class');
-                        dayEl.title = 'Clase DIW';
-                    }
+                } else if (dow === 0 || dow === 6) {
+                    dayEl.classList.add('weekend');
+                } else if (date >= dualStart && date <= dualEnd) {
+                    dayEl.classList.add('dual');
+                    dayEl.title = "Formación Dual";
+                } else if (diwSessions[key]) {
+                    dayEl.classList.add('diw-class');
+                    dayEl.title = `Sesión de ${diwSessions[key]}`;
                 }
 
                 grid.appendChild(dayEl);
@@ -290,10 +310,21 @@
             card.appendChild(grid);
             container.appendChild(card);
         });
+
+        // Llenar tabla resumen
+        const tbody = document.getElementById('ud-summary-body');
+        udDistribution.forEach(ud => {
+            const row = tbody.insertRow();
+            row.innerHTML = `<td>${ud.name}</td><td>${ud.count} sesiones</td><td>${formatDate(ud.start)} - ${formatDate(ud.end)}</td>`;
+        });
+    }
+
+    function formatDate(str) {
+        const d = new Date(str);
+        return `${d.getDate()}/${d.getMonth() + 1}`;
     }
 
     window.onload = generateCalendar;
 </script>
-
 </body>
 </html>
