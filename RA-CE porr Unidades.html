@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: transparent;
+            padding: 1rem;
+        }
+
+        .matrix-mini {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.72rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 0.4rem 0.2rem;
+            text-align: center;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.6rem;
+            letter-spacing: 0.025em;
+        }
+
+        .ra-label {
+            background-color: #ffffff;
+            color: #1e293b;
+            font-weight: 600;
+            text-align: left;
+            padding-left: 0.75rem;
+            width: 55px;
+            border-right: 1px solid #f1f5f9;
+        }
+
+        .u-dot {
+            display: inline-block;
+            width: 25px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.65rem;
+        }
+
+        /* Colores por Unidad (1-12) */
+        .u1 { background-color: #fee2e2; color: #991b1b; } 
+        .u2 { background-color: #ffedd5; color: #a44e34; } 
+        .u3 { background-color: #fef9c3; color: #854d0e; } 
+        .u4 { background-color: #e0ffe6; color: #086f30; } 
+        .u5 { background-color: #d1fae5; color: #065f46; } 
+        .u6 { background-color: #b0dfff; color: #00649a; } 
+        .u7 { background-color: #dbeafe; color: #1e40af; } 
+        .u8 { background-color: #f0f3f6; color: #3730a3; } 
+        .u9 { background-color: #ede9fe; color: #5b21b6; } 
+        .u10 { background-color: #eeebff; color: #6d28d9; } 
+        .u11 { background-color: #f7dbff; color: #850f90; } 
+        .u12 { background-color: #fce7f3; color: #9d174d; } 
+
+        .empty {
+            color: #f1f5f9;
+            font-size: 0.8rem;
+        }
+
+        .header-mini {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid #f1f5f9;
+            background: #fff;
+        }
+
+        .header-mini h2 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="matrix-mini">
+        <div class="header-mini">
+            <h2>Mapeo por Unidades: Módulo 0615</h2>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>RA/CE</th>
+                    <th>a</th><th>b</th><th>c</th><th>d</th><th>e</th><th>f</th><th>g</th><th>h</th><th>i</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- RA 1 -->
+                <tr>
+                    <td class="ra-label">RA 1</td>
+                    <td><span class="u-dot u1">ud1</span></td>
+                    <td><span class="u-dot u1">ud1</span></td>
+                    <td><span class="u-dot u2">ud2</span></td>
+                    <td><span class="u-dot u2">ud2</span></td>
+                    <td><span class="u-dot u1">ud1</span></td>
+                    <td><span class="u-dot u3">ud3</span></td>
+                    <td><span class="u-dot u2">ud2</span></td>
+                    <td class="empty">·</td>
+                    <td class="empty">·</td>
+                </tr>
+                <!-- RA 2 -->
+                <tr>
+                    <td class="ra-label">RA 2</td>
+                    <td><span class="u-dot u3">ud3</span></td>
+                    <td><span class="u-dot u4">ud4</span></td>
+                    <td><span class="u-dot u5">ud5</span></td>
+                    <td><span class="u-dot u5">ud5</span></td>
+                    <td><span class="u-dot u5">ud5</span></td>
+                    <td><span class="u-dot u4">ud4</span></td>
+                    <td><span class="u-dot u4">ud4</span></td>
+                    <td><span class="u-dot u5">ud5</span></td>
+                    <td><span class="u-dot u5">ud5</span></td>
+                </tr>
+                <!-- RA 3 -->
+                <tr>
+                    <td class="ra-label">RA 3</td>
+                    <td><span class="u-dot u7">ud7</span></td>
+                    <td><span class="u-dot u6">ud6</span></td>
+                    <td><span class="u-dot u7">ud7</span></td>
+                    <td><span class="u-dot u6">ud6</span></td>
+                    <td><span class="u-dot u7">ud7</span></td>
+                    <td><span class="u-dot u8">ud8</span></td>
+                    <td><span class="u-dot u6">ud6</span></td>
+                    <td><span class="u-dot u6">ud6</span></td>
+                    <td class="empty">·</td>
+                </tr>
+                <!-- RA 4 -->
+                <tr>
+                    <td class="ra-label">RA 4</td>
+                    <td><span class="u-dot u9">ud9</span></td>
+                    <td><span class="u-dot u9">ud9</span></td>
+                    <td><span class="u-dot u8">ud8</span></td>
+                    <td><span class="u-dot u9">ud8</span></td>
+                    <td><span class="u-dot u9">ud9</span></td>
+                    <td><span class="u-dot u9">ud9</span></td>
+                    <td><span class="u-dot u9">ud9</span></td>
+                    <td class="empty">·</td>
+                    <td class="empty">·</td>
+                </tr>
+                <!-- RA 5 -->
+                <tr>
+                    <td class="ra-label">RA 5</td>
+                    <td><span class="u-dot u10">ud10</span></td>
+                    <td><span class="u-dot u10">ud10</span></td>
+                    <td><span class="u-dot u10">ud10</span></td>
+                    <td><span class="u-dot u10">ud10</span></td>
+                    <td><span class="u-dot u11">ud11</span></td>
+                    <td><span class="u-dot u11">ud11</span></td>
+                    <td><span class="u-dot u11">ud11</span></td>
+                    <td class="empty">·</td>
+                    <td class="empty">·</td>
+                </tr>
+                <!-- RA 6 -->
+                <tr>
+                    <td class="ra-label">RA 6</td>
+                    <td><span class="u-dot u12">ud12</span></td>
+                    <td><span class="u-dot u12">ud12</span></td>
+                    <td><span class="u-dot u12">ud12</span></td>
+                    <td><span class="u-dot u12">ud12</span></td>
+                    <td><span class="u-dot u12">ud12</span></td>
+                    <td><span class="u-dot u12">ud12</span></td>
+                    <td class="empty">·</td>
+                    <td class="empty">·</td>
+                    <td class="empty">·</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
