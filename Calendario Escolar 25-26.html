@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario Escolar 2025-2026 | Programación DIW</title>
+    <title>Calendario Escolar 2025-2026 | IES Al-Ándalus</title>
     <style>
         :root {
             --bg: #f8fafc;
@@ -155,7 +155,7 @@
 <div class="container">
     <header>
         <h1>Planificación Docente 2025/2026</h1>
-        <div style="color: var(--primary); font-weight: 600;">Programación DIW</div>
+        <div style="color: var(--primary); font-weight: 600;">I.E.S. Al-Ándalus (Almería)</div>
     </header>
 
     <div class="info-panel">
@@ -240,23 +240,50 @@
             current.setDate(current.getDate() + 1);
         }
 
-        // Dividir las sesiones entre 11 unidades
+        // --- NUEVA LÓGICA DE REPARTO ---
         const totalSessions = sessions.length;
-        const sessionsPerUd = Math.floor(totalSessions / 11);
-        const remainder = totalSessions % 11;
+        const fixedSessions = 5 + 9; // UD3 (5) + UD4 (9)
+        const remainingSessions = totalSessions - fixedSessions;
+        
+        // Calculamos el reparto para las 9 unidades restantes (1, 2, 5, 6, 7, 8, 9, 10, 11)
+        const sessionsPerUdBase = Math.floor(remainingSessions / 9);
+        let remainder = remainingSessions % 9;
 
         let index = 0;
         for (let i = 1; i <= 11; i++) {
-            const count = i <= remainder ? sessionsPerUd + 1 : sessionsPerUd;
-            const startKey = sessions[index];
-            for (let j = 0; j < count; j++) {
-                diwSessions[sessions[index]] = `UD${i}`;
-                index++;
+            let count;
+
+            // Asignación de sesiones por unidad
+            if (i === 3) {
+                count = 5; // Forzado
+            } else if (i === 4) {
+                count = 9; // Forzado
+            } else {
+                // Reparto dinámico para el resto
+                count = sessionsPerUdBase + (remainder > 0 ? 1 : 0);
+                if (remainder > 0) remainder--;
             }
+
+            const startKey = sessions[index];
+            
+            for (let j = 0; j < count; j++) {
+                if (sessions[index]) {
+                    diwSessions[sessions[index]] = `UD${i}`;
+                    index++;
+                }
+            }
+            
             const endKey = sessions[index - 1];
-            udDistribution.push({ name: `UD${i}`, count, start: startKey, end: endKey });
+            udDistribution.push({ 
+                name: `UD${i}`, 
+                count, 
+                start: startKey, 
+                end: endKey 
+            });
         }
-        udDistribution.push({name: `UD12`, count: 24, start: '2026-04-14', end: '2026-06-9'});
+
+        // Unidad 12 se mantiene igual
+        udDistribution.push({name: `UD12`, count: 24, start: '2026-04-14', end: '2026-06-09'});
     }
 
     function generateCalendar() {
@@ -329,4 +356,5 @@
 </script>
 </body>
 </html>
+
 
