@@ -38,7 +38,7 @@
 
         .info-panel {
             background: #fff;
-            border-left: 5px solid #a855f7;
+            border-left: 5px solid #3b82f6;
             padding: 15px;
             margin-bottom: 25px;
             border-radius: 8px;
@@ -126,7 +126,7 @@
         .holiday { background-color: var(--holiday) !important; color: white !important; font-weight: bold; }
         .non-school { background-color: var(--non-school) !important; color: white !important; font-weight: bold; }
         .vacation { background-color: var(--vacation) !important; color: #166534 !important; }
-        .diw-class { background-color: var(--diw-class) !important; color: #0369a1 !important; border: 1px dashed #7dd3fc; }
+        .diw-class { background-color: var(--diw-class) !important; color: #0369a1 !important; border: 1px solid #7dd3fc; }
         .dual { background-color: var(--dual) !important; color: #6b21a8 !important; font-weight: bold; border: 1px solid #c084fc; }
 
         .ud-table {
@@ -154,21 +154,21 @@
 
 <div class="container">
     <header>
-        <h1>Planificación Docente 2025/2026</h1>
-        <div style="color: var(--primary); font-weight: 600;">Programación DIW</div>
+        <h1>Planificación Curricular DIW 2025/2026</h1>
+        <div style="color: var(--primary); font-weight: 600;">Programación DIW (Almería)</div>
     </header>
 
     <div class="info-panel">
         <strong>Resumen Unidades Didácticas:</strong><br>
-        Se han distribuido 11 unidades entre 76 sesiones disponibles (M, X, V) antes de la Formación Dual.<br>
+        Se han distribuido 11 unidades entre 77 sesiones disponibles (M, X, V) antes de la Formación Dual.<br>
         <strong>Formación Dual:</strong> Inicia el 13 de abril de 2026 y finaliza el 9 de junio (280h totales / 40 días lectivos).
     </div>
 
     <div class="legend">
         <div class="legend-item"><div class="dot" style="background: var(--holiday)"></div> Festivo</div>
         <div class="legend-item"><div class="dot" style="background: var(--non-school)"></div> No Lectivo</div>
-        <div class="legend-item"><div class="dot" style="background: var(--dual)"></div> Periodo Dual</div>
-        <div class="legend-item"><div class="dot" style="background: var(--diw-class)"></div> Sesión UD (Pasa el cursor)</div>
+        <div class="legend-item"><div class="dot" style="background: var(--diw-class)"></div> Sesión Lectiva (UD1-11)</div>
+        <div class="legend-item"><div class="dot" style="background: var(--dual)"></div> UD12 (Dual)</div>
         <div class="legend-item"><div class="dot" style="background: var(--vacation)"></div> Vacaciones</div>
     </div>
 
@@ -178,8 +178,8 @@
         <thead>
             <tr>
                 <th>Unidad</th>
-                <th>Sesiones Estimadas</th>
-                <th>Periodo Aproximado</th>
+                <th>Sesiones</th>
+                <th>Periodo (Día/Mes)</th>
             </tr>
         </thead>
         <tbody id="ud-summary-body"></tbody>
@@ -221,69 +221,80 @@
     const dualEnd = new Date(2026, 5, 9);
     const schoolEnd = new Date(2026, 5, 23);
 
-    // Mapeo de sesiones DIW por fecha
     const diwSessions = {};
     const udDistribution = [];
 
+    function getDateKey(date) {
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    }
+
     function calculateSessions() {
         let current = new Date(schoolStart);
-        let sessions = [];
+        let sessionsPreDual = [];
 
+        // Sesiones antes de la Dual (UD1 - UD11)
         while (current < dualStart) {
             const dow = current.getDay();
-            const key = current.toISOString().split('T')[0];
-            
-            // Martes(2), Miércoles(3), Viernes(5)
+            const key = getDateKey(current);
             if ((dow === 2 || dow === 3 || dow === 5) && !academicEvents[key]) {
-                sessions.push(key);
+                sessionsPreDual.push(key);
             }
             current.setDate(current.getDate() + 1);
         }
 
-        // --- NUEVA LÓGICA DE REPARTO ---
-        const totalSessions = sessions.length;
-        const fixedSessions = 5 + 9; // UD3 (5) + UD4 (9)
-        const remainingSessions = totalSessions - fixedSessions;
-        
-        // Calculamos el reparto para las 9 unidades restantes (1, 2, 5, 6, 7, 8, 9, 10, 11)
-        const sessionsPerUdBase = Math.floor(remainingSessions / 9);
-        let remainder = remainingSessions % 9;
+        // Distribución UD1 a UD11
+        const totalPreDual = sessionsPreDual.length;
+        // Fijas: UD3(5), UD4(7), UD5(9) = 21
+        const fixedPreDual = 21;
+        const remainingPreDual = totalPreDual - fixedPreDual;
+        const otherUdsCount = 8; // UD1, 2, 6, 7, 8, 9, 10, 11
+        const perUd = Math.floor(remainingPreDual / otherUdsCount);
+        const extra = remainingPreDual % otherUdsCount;
 
-        let index = 0;
+        let sessionIdx = 0;
+        let otherCount = 0;
+
         for (let i = 1; i <= 11; i++) {
             let count;
-
-            // Asignación de sesiones por unidad
-            if (i === 3) {
-                count = 5; // Forzado
-            } else if (i === 4) {
-                count = 9; // Forzado
-            } else {
-                // Reparto dinámico para el resto
-                count = sessionsPerUdBase + (remainder > 0 ? 1 : 0);
-                if (remainder > 0) remainder--;
+            if (i === 3) count = 5;
+            else if (i === 5) count = 9;
+            else {
+                count = (otherCount < extra) ? perUd + 1 : perUd;
+                otherCount++;
             }
 
-            const startKey = sessions[index];
-            
+            const start = sessionsPreDual[sessionIdx];
             for (let j = 0; j < count; j++) {
-                if (sessions[index]) {
-                    diwSessions[sessions[index]] = `UD${i}`;
-                    index++;
+                if (sessionsPreDual[sessionIdx]) {
+                    diwSessions[sessionsPreDual[sessionIdx]] = `UD${i}`;
+                    sessionIdx++;
                 }
             }
-            
-            const endKey = sessions[index - 1];
-            udDistribution.push({ 
-                name: `UD${i}`, 
-                count, 
-                start: startKey, 
-                end: endKey 
-            });
+            const end = sessionsPreDual[sessionIdx - 1];
+            udDistribution.push({ name: `UD${i}`, count, start, end });
         }
 
-        // Unidad 12 se mantiene igual
-        udDistribution.push({name: `UD12`, count: 24, start: '2026-04-14', end: '2026-06-09'});
+        // UD12 - Dual (Fija en 24 sesiones según lo solicitado)
+        let dualSessionsKeys = [];
+        current = new Date(dualStart);
+        while (current <= dualEnd) {
+            const dow = current.getDay();
+            const key = getDateKey(current);
+            if ((dow === 2 || dow === 3 || dow === 5) && !academicEvents[key]) {
+                dualSessionsKeys.push(key);
+                diwSessions[key] = "UD12";
+            }
+            current.setDate(current.getDate() + 1);
+        }
+        udDistribution.push({ 
+            name: "UD12", 
+            count: 24, // Forzado a 24 sesiones
+            start: dualSessionsKeys[0], 
+            end: dualSessionsKeys[dualSessionsKeys.length - 1] 
+        });
     }
 
     function generateCalendar() {
@@ -310,7 +321,7 @@
             const daysInMonth = new Date(period.y, period.m + 1, 0).getDate();
             for (let d = 1; d <= daysInMonth; d++) {
                 const date = new Date(period.y, period.m, d);
-                const key = date.toISOString().split('T')[0];
+                const key = getDateKey(date);
                 const dayEl = document.createElement('div');
                 dayEl.className = 'day';
                 dayEl.textContent = d;
@@ -325,12 +336,14 @@
                     dayEl.classList.add('vacation');
                 } else if (dow === 0 || dow === 6) {
                     dayEl.classList.add('weekend');
-                } else if (date >= dualStart && date <= dualEnd) {
-                    dayEl.classList.add('dual');
-                    dayEl.title = "Formación Dual";
                 } else if (diwSessions[key]) {
-                    dayEl.classList.add('diw-class');
-                    dayEl.title = `Sesión de ${diwSessions[key]}`;
+                    if (diwSessions[key] === "UD12") {
+                        dayEl.classList.add('dual');
+                        dayEl.title = "UD12 - Formación Dual";
+                    } else {
+                        dayEl.classList.add('diw-class');
+                        dayEl.title = `Sesión de ${diwSessions[key]}`;
+                    }
                 }
 
                 grid.appendChild(dayEl);
@@ -339,23 +352,24 @@
             container.appendChild(card);
         });
 
-        // Llenar tabla resumen
         const tbody = document.getElementById('ud-summary-body');
         udDistribution.forEach(ud => {
             const row = tbody.insertRow();
-            row.innerHTML = `<td>${ud.name}</td><td>${ud.count} sesiones</td><td>${formatDate(ud.start)} - ${formatDate(ud.end)}</td>`;
+            row.innerHTML = `<td>${ud.name}</td><td>${ud.count}</td><td>${formatDate(ud.start)} - ${formatDate(ud.end)}</td>`;
         });
     }
 
     function formatDate(str) {
-        const d = new Date(str);
-        return `${d.getDate()}/${d.getMonth() + 1}`;
+        if (!str) return "-";
+        const parts = str.split('-');
+        return `${parts[2]}/${parts[1]}`;
     }
 
     window.onload = generateCalendar;
 </script>
 </body>
 </html>
+
 
 
 
