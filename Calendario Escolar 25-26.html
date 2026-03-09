@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -126,8 +125,8 @@
         .holiday { background-color: var(--holiday) !important; color: white !important; font-weight: bold; }
         .non-school { background-color: var(--non-school) !important; color: white !important; font-weight: bold; }
         .vacation { background-color: var(--vacation) !important; color: #166534 !important; }
-        .diw-class { background-color: var(--diw-class) !important; color: #0369a1 !important; border: 1px solid #7dd3fc; }
-        .dual { background-color: var(--dual) !important; color: #6b21a8 !important; font-weight: bold; border: 1px solid #c084fc; }
+        .diw-class { background-color: var(--diw-class); color: #0369a1 !important; border: 1px solid #7dd3fc; }
+        .dual { background-color: var(--dual); color: #6b21a8 !important; font-weight: bold; border: 1px solid #c084fc; }
 
         .ud-table {
             width: 100%;
@@ -146,6 +145,20 @@
         }
 
         .ud-table th { background: #f1f5f9; color: #475569; font-weight: 600; }
+
+        /* Colores por Unidad (1-12) */
+        .UD1 { background-color: #fee2e2; color: #991b1b; } 
+        .UD2 { background-color: #ffedd5; color: #a44e34; } 
+        .UD3 { background-color: #fef9c3; color: #854d0e; } 
+        .UD4 { background-color: #e0ffe6; color: #086f30; } 
+        .UD5 { background-color: #d1fae5; color: #065f46; } 
+        .UD6 { background-color: #b0dfff; color: #00649a; } 
+        .UD7 { background-color: #dbeafe; color: #1e40af; } 
+        .UD8 { background-color: #f0f3f6; color: #3730a3; } 
+        .UD9 { background-color: #ede9fe; color: #5b21b6; } 
+        .UD10 { background-color: #c7bbff; color: #5717bd; } 
+        .UD11 { background-color: #f7dbff; color: #850f90; } 
+        .UD12 { background-color: #fce7f3; color: #9d174d; } 
 
         @media (max-width: 600px) { .calendar-grid { grid-template-columns: 1fr; } }
     </style>
@@ -342,6 +355,7 @@
                         dayEl.title = "UD12 - Formación Dual";
                     } else {
                         dayEl.classList.add('diw-class');
+                        dayEl.classList.add(`${diwSessions[key]}`);
                         dayEl.title = `Sesión de ${diwSessions[key]}`;
                     }
                 }
@@ -369,7 +383,3 @@
 </script>
 </body>
 </html>
-
-
-
-
