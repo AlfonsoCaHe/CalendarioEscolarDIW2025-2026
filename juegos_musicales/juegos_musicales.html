@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gimnasio Musical - 2º EEBB</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bravura-text-font@1.0.3/bravura-text.css">
     <style>
         :root {
             --primary: #4a90e2;
@@ -40,12 +42,17 @@
             color: var(--primary);
             margin-bottom: 5px;
             font-size: 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         @media(min-width: 600px) {
-            body { padding: 20px; }
-            h1 { font-size: 2.5rem; }
+            body {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
         }
 
         .subtitle {
@@ -60,12 +67,14 @@
             background: white;
             padding: 20px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             text-align: center;
         }
 
         @media(min-width: 600px) {
-            .container { padding: 30px; }
+            .container {
+                padding: 30px;
+            }
         }
 
         /* Menú Principal Responsivo */
@@ -76,8 +85,13 @@
         }
 
         @media(min-width: 550px) {
-            .menu { grid-template-columns: 1fr 1fr; }
-            .full-width { grid-column: span 2; }
+            .menu {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .full-width {
+                grid-column: span 2;
+            }
         }
 
         button {
@@ -90,13 +104,13 @@
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
         }
 
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             filter: brightness(1.05);
         }
 
@@ -164,8 +178,13 @@
             min-height: 30px;
         }
 
-        .correct { color: var(--success); }
-        .incorrect { color: var(--danger); }
+        .correct {
+            color: var(--success);
+        }
+
+        .incorrect {
+            color: var(--danger);
+        }
 
         /* Estilos del Pentagrama SVG Adaptable */
         .pentagram-container {
@@ -179,7 +198,10 @@
         }
 
         .rhythm-visual {
+            font-family: 'Bravura Text', 'BravuraText', sans-serif;
+            /* Aplica la fuente musical */
             font-size: 3rem;
+            /* Al ser tipográfica puedes escalarla al tamaño que quieras */
             margin: 15px 0;
             min-height: 70px;
             display: flex;
@@ -196,6 +218,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -204,37 +227,42 @@
     </header>
 
     <div class="container">
-        
+
         <div id="loading-screen">
             <p>Cargando lecciones musicales... 🎼</p>
         </div>
 
         <div id="screen-menu" class="screen">
-            <p style="font-size: 1.1rem; margin-bottom: 25px;">¡Elige un desafío para empezar a entrenar tu oído y tu mente!</p>
+            <p style="font-size: 1.1rem; margin-bottom: 25px;">¡Elige un desafío para empezar a entrenar tu oído y tu
+                mente!</p>
             <div class="menu">
-                <button onclick="startGame('notes')" style="background-color: #ff7675;">🎯 Atrapa la Nota (Clave de Sol)</button>
+                <button onclick="startGame('notes')" style="background-color: #ff7675;">🎯 Atrapa la Nota (Clave de
+                    Sol)</button>
                 <button onclick="startGame('rhythm')" style="background-color: #2ecc71;">⏱️ El Reloj Rítmico</button>
-                <button onclick="startGame('theory')" class="full-width" style="background-color: #9b59b6;">🧠 Sabio Musical (Teoría y Matices)</button>
+                <button onclick="startGame('theory')" class="full-width" style="background-color: #9b59b6;">🧠 Sabio
+                    Musical (Teoría y Matices)</button>
             </div>
         </div>
 
         <div id="screen-notes" class="screen">
             <div class="score-board">Aciertos: <span id="score-notes">0</span></div>
             <h3>¿Qué nota es esta?</h3>
-            
+
             <div class="pentagram-container">
                 <svg viewBox="0 0 300 180" width="100%" height="100%">
-                    <line x1="20" y1="50" x2="280" y2="50" stroke="black" stroke-width="2"/>
-                    <line x1="20" y1="70" x2="280" y2="70" stroke="black" stroke-width="2"/>
-                    <line x1="20" y1="90" x2="280" y2="90" stroke="black" stroke-width="2"/>
-                    <line x1="20" y1="110" x2="280" y2="110" stroke="black" stroke-width="2"/>
-                    <line x1="20" y1="130" x2="280" y2="130" stroke="black" stroke-width="2"/>
-                    
+                    <line x1="20" y1="50" x2="280" y2="50" stroke="black" stroke-width="2" />
+                    <line x1="20" y1="70" x2="280" y2="70" stroke="black" stroke-width="2" />
+                    <line x1="20" y1="90" x2="280" y2="90" stroke="black" stroke-width="2" />
+                    <line x1="20" y1="110" x2="280" y2="110" stroke="black" stroke-width="2" />
+                    <line x1="20" y1="130" x2="280" y2="130" stroke="black" stroke-width="2" />
+
                     <text x="25" y="115" font-size="55" font-family="Arial">𝄞</text>
-                    
-                    <line id="ledger-line" x1="130" y1="150" x2="170" y2="150" stroke="black" stroke-width="2" display="none"/>
-                    
-                    <ellipse id="note-head" cx="150" cy="90" rx="12" ry="8" fill="black" transform="rotate(-15 150 90)"/>
+
+                    <line id="ledger-line" x1="130" y1="150" x2="170" y2="150" stroke="black" stroke-width="2"
+                        display="none" />
+
+                    <ellipse id="note-head" cx="150" cy="90" rx="12" ry="8" fill="black"
+                        transform="rotate(-15 150 90)" />
                 </svg>
             </div>
 
@@ -246,7 +274,7 @@
         <div id="screen-rhythm" class="screen">
             <div class="score-board">Aciertos: <span id="score-rhythm">0</span></div>
             <h3 id="question-rhythm">Pregunta rítmica</h3>
-            
+
             <div class="rhythm-visual" id="visual-rhythm"></div>
 
             <div class="options-container" id="options-rhythm"></div>
@@ -307,7 +335,7 @@
 
             } catch (error) {
                 console.error("Error cargando la aplicación:", error);
-                document.getElementById('loading-screen').innerHTML = 
+                document.getElementById('loading-screen').innerHTML =
                     `<p style="color:var(--danger)">⚠️ Error al cargar los ficheros JSON.<br><small>Recuerda que debes ejecutar la app bajo un servidor local (HTTP) para permitir peticiones asíncronas.</small></p>`;
             }
         }
@@ -334,7 +362,7 @@
         function nextQuestion(type) {
             canAnswer = true;
             document.getElementById(`feedback-${type}`).innerHTML = '';
-            
+
             // Si la "piscina" de preguntas de este modo está vacía, la rellenamos clonando la base de datos maestra
             if (questionPools[type].length === 0) {
                 questionPools[type] = [...masterData[type]];
@@ -342,17 +370,17 @@
 
             // Seleccionamos un índice al azar de las preguntas que quedan disponibles
             const randomIndex = Math.floor(Math.random() * questionPools[type].length);
-            
+
             // Extraemos (.splice) el elemento seleccionado para que se elimine de la piscina actual
             currentItem = questionPools[type].splice(randomIndex, 1)[0];
-            
+
             if (type === 'notes') {
                 const noteHead = document.getElementById('note-head');
                 const ledgerLine = document.getElementById('ledger-line');
-                
+
                 noteHead.setAttribute('cy', currentItem.cy);
                 noteHead.setAttribute('transform', `rotate(-15 150 ${currentItem.cy})`);
-                
+
                 if (currentItem.ledger) {
                     ledgerLine.style.display = 'block';
                 } else {
@@ -376,7 +404,7 @@
         function generateOptions(type, optionsArray, correctValue) {
             const container = document.getElementById(`options-${type}`);
             container.innerHTML = '';
-            
+
             let finalOptions = [...optionsArray];
             // No mezclamos las notas del pentagrama para mantener el orden secuencial educativo Do-Re-Mi...
             if (type !== 'notes') {
@@ -397,7 +425,7 @@
             canAnswer = false;
 
             const feedbackDiv = document.getElementById(`feedback-${type}`);
-            
+
             if (selected === correct) {
                 feedbackDiv.innerHTML = "<span class='correct'>¡Excelente! 🎉 ¡Correcto!</span>";
                 scores[type]++;
@@ -420,4 +448,5 @@
         window.onload = loadAllData;
     </script>
 </body>
+
 </html>
