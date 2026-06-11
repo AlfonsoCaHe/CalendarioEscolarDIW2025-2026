@@ -1,0 +1,14 @@
+[
+  { "name": "DO", "cy": 150, "ledger": true },
+  { "name": "RE", "cy": 140, "ledger": false },
+  { "name": "MI", "cy": 130, "ledger": false },
+  { "name": "FA", "cy": 120, "ledger": false },
+  { "name": "SOL", "cy": 110, "ledger": false },
+  { "name": "LA", "cy": 100, "ledger": false },
+  { "name": "SI", "cy": 90, "ledger": false },
+  { "name": "DO", "cy": 80, "ledger": false },
+  { "name": "RE", "cy": 70, "ledger": false },
+  { "name": "MI", "cy": 60, "ledger": false },
+  { "name": "FA", "cy": 50, "ledger": false },
+  { "name": "SOL", "cy": 40, "ledger": false }
+]
